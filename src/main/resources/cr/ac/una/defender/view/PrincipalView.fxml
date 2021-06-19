@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="500.0" prefWidth="800.0" styleClass="root" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.defender.controller.PrincipalViewController">
+   <children>
+      <HBox layoutY="-1.0" prefHeight="400.0" prefWidth="700.0" styleClass="root" stylesheets="@Style.css" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+         <children>
+            <HBox prefHeight="400.0" prefWidth="269.0" />
+            <VBox prefHeight="400.0" prefWidth="252.0">
+               <HBox.margin>
+                  <Insets left="350.0" />
+               </HBox.margin>
+               <children>
+                  <JFXButton fx:id="btnInicio" onAction="#onActionBtnInicio" prefHeight="49.0" prefWidth="132.0" text="Partida">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="30.0" right="10.0" top="85.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnPuntaje" onAction="#onActionBtnPuntaje" prefHeight="49.0" prefWidth="132.0" text="Puntajes">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="30.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnBallesta" layoutX="20.0" layoutY="179.0" onAction="#onActionBtnBallesta" prefHeight="49.0" prefWidth="132.0" text="Ballesta">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="30.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnHelp" layoutX="20.0" layoutY="110.0" onAction="#onActionBtnHelp" prefHeight="49.0" prefWidth="132.0" text="Como Jugar">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="30.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

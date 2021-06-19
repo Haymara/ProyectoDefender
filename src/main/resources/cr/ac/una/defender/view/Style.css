@@ -1,0 +1,112 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.root {
+    -fx-background-image: url("../resources/posiblefondo8.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
+}
+
+.root2 {
+    -fx-background-image: url("../resources/FondoPiedraDefender.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 869px 631px;
+}
+
+.root3 {
+    -fx-background-image: url("../resources/LogoUna.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
+}
+
+.root4{
+    -fx-background-image: url("../resources/CargandoCastillo.gif");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
+}
+
+.jfx-text-field{
+    -fx-font-family: Arial Black;
+    -fx-font-size: 14px;
+    -fx-pref-heigtht: 26px;
+    -fx-min-heigtht: 26px;
+    -fx-max-heighth: 26px;
+    -fx-alignment:TOP_LEFT;
+    -fx-text-fill: cornsilk;
+    -fx-prompt-text-fill: cornsilk;
+}
+
+.jfx-text-field:hover {
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow( gaussian, red, 15, 0.5, 0.0, 0.0);
+}
+
+.jfx-text-area{
+    -fx-font-family: Arial Black;
+    -fx-font-size: 14px;
+    -fx-pref-heigtht: 26px;
+    -fx-min-heigtht: 26px;
+    -fx-max-heighth: 26px;
+    -fx-alignment:TOP_LEFT;
+    -fx-text-fill: black;
+}
+
+.jfx-button{
+    -jfx-button-type: RAISED;
+    -fx-content-display: center;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-alignment:CENTER;
+    -fx-background-radius: 20px;
+    -fx-background-color: cornsilk;
+    -fx-border-color: #000000;
+    -fx-border-radius: 15px;
+    -fx-border-width: 3;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    /*-fx-background-color: #696969;*/
+}
+
+.jfx-button:hover {
+    -fx-font-size: 12px;
+    -fx-effect: dropshadow( gaussian, red, 15, 0.5, 0.0, 0.0);
+}
+
+.label{
+    -fx-font-size: 15px;
+    -fx-font-family: Arial Black;
+    -fx-text-fill: cornsilk;
+    -fx-font-weight: bold; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 2, 0.0, 1, 2);
+}
+
+#lblPuntaje, #lblNivel, #lblPuntajex2, #lblNivelx2{
+    -fx-font-size: 15pt;
+    -fx-text-fill: white;
+    -fx-font-family: Forte;
+}
+
+.label:hover {
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow( gaussian, red, 15, 0.5, 0.0, 0.0);
+}
+
+#lblLogin{
+    -fx-background-radius: 15px;
+    -fx-alignment:CENTER;
+    -fx-font-family: Arial Black;
+    -fx-border-color: #000000;
+    -fx-font-size: 15px;
+    -fx-text-fill: cornsilk;
+    -fx-border-radius: 10px;
+    -fx-border-width: 3px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+.vbx{
+    -fx-background-radius: 15px;
+    -fx-border-color: cornsilk;
+    -fx-border-radius: 15px;
+    -fx-border-width: 3;
+}

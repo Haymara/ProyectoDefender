@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="376.0" styleClass="root4" stylesheets="@Style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="cr.ac.una.defender.controller.CargandoViewController">
+   <children>
+      <ProgressIndicator fx:id="pgbCargando" layoutX="169.0" layoutY="399.0" prefHeight="52.0" prefWidth="38.0" progress="0.0" />
+   </children>
+</AnchorPane>

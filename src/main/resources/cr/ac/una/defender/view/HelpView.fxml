@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" styleClass="root3" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.defender.controller.HelpViewController">
+   <children>
+      <HBox layoutX="-3.0" layoutY="-1.0" prefHeight="80.0" prefWidth="707.0">
+         <children>
+            <JFXButton fx:id="btnSalir" onAction="#onActionBtnSalir" prefHeight="46.0" prefWidth="52.0" text=" ">
+               <graphic>
+                  <ImageView fitHeight="59.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/return.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+         </children>
+      </HBox>
+      <JFXTextArea editable="false" layoutX="98.0" layoutY="121.0" prefHeight="257.0" prefWidth="529.0" text="Para jugar deberán apuntar la ballesta en el ángulo deseado y disparar presionando repetidamente la tecla de disparo o dejándola presionada.&#10;&#10;Al disparar la ballesta y acertar el disparo en un monstruo el mismo se debilitará en sus puntos de vida según el poder de la ballesta, hasta que sea eliminado.&#10;&#10;Con cada impacto de una flecha en un monstruo este retrocederá un poco su posición. Los monstruos quitarán puntos de vida al llegar hasta el castillo y atacarlo, o bien con un ataque a distancia si este lo posee, la cantidad de puntos descontados dependerán del poder de cada monstruo. En cada nivel aparecerán distinta cantidad de rondas y tipos de monstruos. El nivel termina cuando el jugador acabe con todas las rondas de monstruos, o bien cuando estos destruyan su castillo" />
+   </children>
+</AnchorPane>

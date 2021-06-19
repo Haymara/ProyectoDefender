@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="460.0" prefWidth="538.0" styleClass="root3" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.defender.controller.CreditosViewController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="13.0" prefHeight="440.0" prefWidth="519.0" spacing="30.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <HBox alignment="TOP_RIGHT" prefHeight="47.0" prefWidth="300.0">
+               <children>
+                  <HBox prefHeight="47.0" prefWidth="480.0">
+                     <children>
+                        <JFXButton fx:id="btnSalir" onAction="#onActionBtnSalir" prefHeight="46.0" prefWidth="52.0" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="39.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/return.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <ImageView fitHeight="53.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../../Desktop/Defender/Defender/src/main/resources/cr/ac/una/defender/resources/LogoUna.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Label prefHeight="38.0" prefWidth="249.0" text="Universidad Nacional de Costa Rica" />
+            <Label text="Ingeniería en Sistemas de Información" />
+            <Label text="Programación II" />
+            <Label text="Estudiantes:" />
+            <Label text="Duwan Garcia Barrantes">
+               <VBox.margin>
+                  <Insets top="-25.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Haymara Rivera González">
+               <VBox.margin>
+                  <Insets top="-20.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="I Ciclo" />
+            <Label text="Año 2021" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
