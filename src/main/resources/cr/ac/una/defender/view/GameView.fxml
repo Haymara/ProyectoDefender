@@ -56,7 +56,7 @@
                   <Image url="@../resources/game/Castillo.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imvBallesta" fitHeight="143.0" fitWidth="246.0" layoutY="195.0" onMouseClicked="#onMouseClickedImvBallesta" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imvBallesta" fitHeight="143.0" fitWidth="246.0" layoutY="182.0" onMouseClicked="#onMouseClickedImvBallesta" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/game/BallestaAzul.PNG" />
                </image>
@@ -85,12 +85,12 @@
                         </ProgressBar>
                      </children>
                   </VBox>
-                  <JFXButton fx:id="btnHechizoFuego" onDragDetected="#onDragDetectedHechizoFuego" prefHeight="42.0" prefWidth="40.0" styleClass="jfx-buttonHechizos" text=" ">
+                  <JFXButton fx:id="btnHechizoFuego" onDragDetected="#onDragDetectedHechizoFuego" onMouseMoved="#onMouseMovedBtnHechizoFuego" prefHeight="42.0" prefWidth="40.0" styleClass="jfx-buttonHechizos" text=" ">
                      <HBox.margin>
                         <Insets bottom="10.0" left="350.0" right="10.0" top="10.0" />
                      </HBox.margin>
                      <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imvFire" fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/HechizoFuego.png" />
                            </image>

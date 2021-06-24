@@ -5,35 +5,20 @@
  */
 package cr.ac.una.defender.controller.clases;
 
-import cr.ac.una.defender.controller.clases.Monstruo;
-import java.awt.Canvas;
-import java.awt.Graphics;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import javafx.animation.AnimationTimer;
-import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
@@ -43,24 +28,23 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 /**
  *
  * @author Haymara
  */
-public class Juego extends Pane {
+public final class Juego extends Pane {
     
-    
-    private int puntuacion=500;
-    private final String red= "Red.jpg";
-    private final String blue= "Blue.jpg";
-    private final String green= "Green.jpg";
+    private int puntuacion=1;
+    public final TipoMonstruo monstruoss= new  TipoMonstruo(1,1);
     private BorderPane bp = new BorderPane();
     private HBox hb = new HBox();
+    private HBox hb1 = new HBox();
+    private HBox hfire = new HBox();
+    private HBox hfire2 = new HBox();
     private VBox hbz = new VBox();
+    private VBox vfire = new VBox();
     private AnchorPane anchoPane = new AnchorPane();
     private AnchorPane anpzona = new AnchorPane();
     public GridPane gp = new GridPane();
@@ -70,201 +54,119 @@ public class Juego extends Pane {
     public int colSource;
     public int filSource;
     
-
+    public Monstruo source= new Monstruo();
+    public Monstruo target= new Monstruo();
+    public Monstruo seleccionada= new Monstruo();
+    
+    Random rnd = new Random();
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
     
     private boolean bandera=false;
     
-        Random rnd = new Random();
-   private AnchorPane anchoPane1 = new AnchorPane();
-    Pane playfieldLayer;
-    Pane scoreLayer;
-
-    Image playerImage;
-    Image enemyImage;
-
     
-    List<Enemy> enemies = new ArrayList<>();
-
-    Text collisionText = new Text();
-    boolean collision = false;
-
-    
-    public List<List<Monstruo>> cartasFila = new ArrayList<>();
-    public List<List<Monstruo>> cartasPilaWin = new ArrayList<>();
-    public List<Monstruo>cartasMazo = new ArrayList(); 
-    private List<Monstruo> seleccionadas = new ArrayList();
-    private List<Monstruo> roundWin ;
-    private List<StackPane> fondosPila = new ArrayList();
+    public List<List<Monstruo>> monstruosFila = new ArrayList<>();
+    private List<StackPane> Pila = new ArrayList();
     private int movimientos=0;
     
     Label pts,movs;
-   
+    
     
     public Juego(){};
    public Juego(Label pts, Label movs){
        this.pts=pts;
        this.movs=movs;
 
-        anchoPane.setPadding(new Insets(0,0,0,0));
         addPila();
+        
+        crearFilas();
         crearCastillo();
         crearBallesta();
+        fire();
         crearZona();
         
-      // spawnEnemies( true);
-      
     }
+
+   private int sum=0;
    
+   EventHandler<MouseEvent> monstruossOnMousePressedEventHandler = new EventHandler<MouseEvent>() {
+       @Override
+       public void handle(MouseEvent t) {
+//  t.setDragDetect(true);
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            orgTranslateX = ((GridPane)(t.getSource())).getTranslateX();
+            orgTranslateY = ((GridPane)(t.getSource())).getTranslateY();
+        }
+    };
+   
+   EventHandler<MouseEvent> monstruoOnMouseReleasedEventHandler = new EventHandler<MouseEvent>(){
+        @Override
+        public void handle(MouseEvent t) {  
+    }
+ };
+   
+   EventHandler<MouseEvent> monstruossOnMouseDraggedEventHandler =  new EventHandler<MouseEvent>() {
+ 
+        @Override
+        public void handle(MouseEvent t) {
+            double offsetX = t.getSceneX() - orgSceneX;
+            double offsetY = t.getSceneY() - orgSceneY;
+            double newTranslateX = orgTranslateX + offsetX;
+            double newTranslateY = orgTranslateY + offsetY;
+            ((Monstruo)(t.getSource())).setTranslateX(newTranslateX);
+            ((Monstruo)(t.getSource())).setTranslateY(newTranslateY);
+        }
+    };
    
    public List<StackPane> sp ;
+   
    public void addPila(){
-        int posx=400;
-        int posy=500;
+        int posx=200;
+        int posy=100;
         hb.setLayoutX(this.getPrefHeight());
         hb.setLayoutY(this.getPrefWidth());
-        hb.setPadding(new Insets(230, 0, 0, 10));//posicion de la ballesta
-        hb.setPrefSize(110,70);
-        bp.setTop(hb);
+        hb.setPadding(new Insets(0, 0, 0, 150));
       
+     //   hb.setPrefSize(0,0);
+      //  bp.setTop(hb);
+        hb1.setLayoutX(this.getPrefHeight());
+        hb1.setLayoutY(this.getPrefWidth());
+        hb1.setPadding(new Insets(230, 0, 0, 10));//posicion de la ballesta
+        hb1.setPrefSize(110,70);
+       
+        hfire.setLayoutX(this.getPrefHeight());
+        hfire.setLayoutY(this.getPrefWidth());
+        hfire.setPadding(new Insets(178, 0, 0, 190));//posicion de poder de fuego
+        
+        hfire2.setLayoutX(this.getPrefHeight());
+        hfire2.setLayoutY(this.getPrefWidth());
+        hfire2.setPadding(new Insets(188, 0, 0, 200));//posicion de poder de fuego
+     
+        bp.setTop(hb1);
+        bp.setBottom(hfire); 
         hbz.setLayoutX(this.getPrefHeight());
         hbz.setLayoutY(this.getPrefWidth());
         hbz.setPadding(new Insets(0, 0, 0, 135));//posicion de la zona
         
         
         this.getChildren().add(anchoPane);
-        this.getChildren().add(hbz);      
-        this.getChildren().add(anchoPane1);
-        this.getChildren().add(hb);
-        
-        // create layers
-        playfieldLayer = new Pane();
-        scoreLayer = new Pane();
+        this.getChildren().add(hbz);  
+       
+        this.getChildren().add(bp);
+         this.getChildren().add(hfire2);
+        this.getChildren().add(hb1);
+       
+//  bp.setBottom(monstruoss);
 
-        anchoPane1.getChildren().add( playfieldLayer);
-        anchoPane1.getChildren().add( scoreLayer);
+
+     monstruoss.monstruos[monstruoss.monstruos.length-1].setOnMouseClicked(event -> MoverAListas());
+        bp.setCenter(monstruoss);
      
-         loadGame();
-
-        createScoreLayer();
-        //createPlayers();
-
-        AnimationTimer gameLoop = new AnimationTimer() {
-
-            @Override
-            public void handle(long now) {
-
-                // player input
-                //players.forEach(sprite -> sprite.processInput());dadwd
-
-                // add random enemies
-                spawnEnemies( true);
-
-                // movement
-               // players.forEach(sprite -> sprite.move());adawda
-                enemies.forEach(sprite -> sprite.move());
-
-                // check collisions
-                checkCollisions();
-
-                // update sprites in scenes
-              //  players.forEach(sprite -> sprite.updateUI());dadwa
-                enemies.forEach(sprite -> sprite.updateUI());
-
-                // check if sprite can be removed
-                enemies.forEach(sprite -> sprite.checkRemovability());
-
-                // remove removables from list, layer, etc
-                removeSprites( enemies);
-
-                // update score, health, etc
-                updateScore();
-            }
-
-        };
-        gameLoop.start();
+      bp.setPadding(new Insets(250, 0, 0, 300));
+//  monstruoss.set;monstruoss.setLayoutY(10);
+          
    }
-   //game
-   
-    private void loadGame() {
-       // playerImage = new Image( getClass().getResource("/player.png").toExternalForm());
-        enemyImage = new Image( getClass().getResource("/enemy.png").toExternalForm());
-   }
-      //game
-
-
-    private void createScoreLayer() {
-
-
-    }
-    
-    private void spawnEnemies( boolean random) {
-
-        if( random && rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
-            return;
-        }
-
-        // image
-        Image image = enemyImage;
-
-        // random speed
-        double speed = rnd.nextDouble() * 1.0 + 2.0;
-
-        // x position range: enemy is always fully inside the screen, no part of it is outside
-        // y position: right on top of the view, so that it becomes visible with the next game iteration
-      //  double x = rnd.nextDouble() * (400 - image.getWidth());
-        //double y = -image.getHeight();
- 
-       // double x = -image.getWidth();
-                
-        //double y = rnd.nextDouble() * (400 - image.getHeight());
-        // create a sprite
-        Enemy enemy = new Enemy( anchoPane1, image, 800, 0, 30, 0, speed, 0, 0,1);
-
-        // manage sprite
-        enemies.add(enemy);
-
-    }
-
-    private void removeSprites(  List<? extends Sprite> spriteList) {
-        Iterator<? extends Sprite> iter = spriteList.iterator();
-        while( iter.hasNext()) {
-            Sprite sprite = iter.next();
-
-            if( sprite.isRemovable()) {
-
-                // remove from layer
-                sprite.removeFromLayer();
-
-                // remove from list
-                iter.remove();
-            }
-        }
-    }
-
-    private void checkCollisions() {
-
-        collision = false;
-/*
-        for( Player player: players) {
-            for( Enemy enemy: enemies) {
-                if( player.collidesWith(enemy)) {
-                    collision = true;
-                }
-            }
-        }*/
-    }
-
-    private void updateScore() {
-        if( collision) {
-            collisionText.setText("Collision");
-        } else {
-            collisionText.setText("");
-        }
-    }
-    //game
-   
    
    private void crearBallesta(){
        Image ballesta = new Image("cr/ac/una/defender/resources/BallestaAzul.png");
@@ -273,15 +175,59 @@ public class Juego extends Pane {
         bow.setPreserveRatio(false);
         bow.setFitHeight(120);
         bow.setFitWidth(90);
-        hb.setAlignment(Pos.CENTER);
-        hb.getChildren().add(bow);
+        hb1.setAlignment(Pos.CENTER);
+        hb1.getChildren().add(bow);
         
-        hb.addEventFilter(MouseEvent.MOUSE_DRAGGED, e->{
+        hb1.addEventFilter(MouseEvent.MOUSE_DRAGGED, e->{
         bow.setRotate(e.getSceneX());
         bow.setRotate(e.getSceneY());
          });
     
     }
+   
+      private void fire(){
+       Image fire = new Image("cr/ac/una/defender/resources/game/fire1.png");  
+     
+       ImageView firepower = new ImageView(fire);
+ 
+       firepower.setPreserveRatio(false);
+       firepower.setFitHeight(180);
+       firepower.setFitWidth(180);
+       
+        hfire.setAlignment(Pos.CENTER);
+        hfire.getChildren().clear();
+        hfire2.getChildren().clear();
+        hfire.getChildren().add(firepower);
+        
+        
+        hfire.setOnMouseClicked(event -> cancel());
+       
+    }
+      
+      public void cancel(){
+       Image cancel = new Image("cr/ac/una/defender/resources/game/cancel.png");
+       ImageView cancelar = new ImageView(cancel);
+       cancelar.setFitHeight(75);
+       cancelar.setFitWidth(75);
+        hfire.getChildren().clear();
+        hfire.getChildren().add(cancelar);
+        
+        Image fire2 = new Image("cr/ac/una/defender/resources/game/fire2.png");      
+        ImageView firepower2 = new ImageView(fire2);
+        firepower2.setPreserveRatio(false);
+        firepower2.setFitHeight(120);
+        firepower2.setFitWidth(120);
+        hfire2.getChildren().clear();
+        hfire2.getChildren().add(firepower2);
+        hfire.setOnMouseClicked(event -> fire());
+        //Coloca una mano sobre la carta por la cual pase el ratón
+        firepower2.setCursor(Cursor.HAND);
+         bp.addEventFilter(MouseEvent.MOUSE_DRAGGED, e->{
+         hfire2.setLayoutX(e.getSceneX());
+         hfire2.setLayoutY(e.getSceneY());
+         });
+      }
+  
    
     private void crearCastillo(){
         Image castillo = new Image("cr/ac/una/defender/resources/game/Castillo.png");
@@ -304,12 +250,117 @@ public class Juego extends Pane {
         hbz.setAlignment(Pos.CENTER);
         hbz.getChildren().add(zone);
     }
-    
-   /*
+   
+   private void crearFilas(){
+    for(int i=0;i<10;i++){
+        monstruosFila.add(new ArrayList<Monstruo>());
+    }
+    }
    
    private static TranslateTransition tt;
    
    private List<Monstruo> marcoFila = new ArrayList();
-  
-*/
+   
+   public void MoverAListas(){
+        AnchorPane p= new AnchorPane();
+        p.setBorder(Border.EMPTY);
+        p.getChildren().add(gp);
+         bp.setCenter(p);
+         
+         RowConstraints r1= new RowConstraints();
+         r1.setValignment(VPos.CENTER);
+        gp.getRowConstraints().add(r1);
+         
+        for (int i=0;i<monstruoss.monstruos.length;i++){
+       
+       /*
+        if(col==10){
+        col=0;
+        
+        fila=fila+1;
+        posx=10;
+        posy=posy+60;
+        gp.setHgap(30);//20
+        gp.setVgap(-75);
+       }*/
+        if( i < 3 ){//cantidad de monstruos
+            
+            
+        monstruoss.addImage(i, true, 3);
+      
+        
+         monstruosFila.get(col).add(monstruoss.siguienteMonstruo());
+          double x,y;
+         x=monstruoss.monstruos[i].getTranslateX()+600;
+         y=monstruoss.monstruos[i].getTranslateY()+120*fila+fila*90;
+        
+         transicionMonstruos(monstruoss.monstruos[i],x,y,3);//transicion de las monstruos boca abajo
+        
+         gp.add(monstruoss.monstruos[i], col, fila, 1, 1);
+        
+         col++;
+         posx=posx+0; 
+        contador ++;
+
+        } 
+          }
+
+   }
+    
+   
+     Random rand = new Random();
+   private void transicionMonstruos(Node node,double fromX,double fromY,int sec){
+        tt= new TranslateTransition();
+        tt.setNode(node);
+        tt.setDuration(Duration.seconds(sec));
+        tt.setFromX(fromX);
+        tt.setFromY(rnd.nextDouble());
+        tt.setCycleCount(1);
+        tt.setToX(-185);
+        tt.setToY(node.getTranslateY());
+        tt.play();
+   }
+
+ 
+        private int col=0;
+        private  int fila=0;
+        private int posx=100;
+        private int posy=200;
+        
+     public void nextRound(){
+       
+    }
+     
+
+public void actualizarPuntuacion(boolean suma){
+if(!suma){
+    this.puntuacion=puntuacion-1;
+    this.movimientos=movimientos+1;
+    pts.setText(String.valueOf(puntuacion));
+    movs.setText(String.valueOf(movimientos));
+    
+}else{
+    if(suma){
+    this.puntuacion=puntuacion+100;
+    pts.setText(String.valueOf(puntuacion));
+    }}
+}
+
+    public int getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    public int getMovimientos() {
+        return movimientos;
+    }
+
+    public void setMovimientos(int movimientos) {
+        this.movimientos = movimientos;
+    }
+
+
 }

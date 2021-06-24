@@ -7,51 +7,74 @@ package cr.ac.una.defender.controller.clases;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 /**
  *
  * @author Haymara
  */
 public class Monstruo extends ImageView {
-    
+       
     private int numero;
-    private String opcion;
+    private String dificultad;
     private float posx;
     private float posy;
     private int tamx;
     private int tamy;
     private int reverso=1;
+    private Boolean oculta;
     public String URL=null;
-    public static final String imagenBallesta= "cr/ac/una/defender/resources/BallestaAzul.png";
-    public static final String BallestaUno= "cr/ac/una/defender/resources/BallestaAzul.png";
-  
-    public static final String[] Opcion={"BallestaRoja"};
-    public static final String[] Opncion1={"BallestaAzul"};
+    public static final String imagenMonstruo=  "cr/ac/una/defender/resources/game/m1.gif";
+    public static final String imagenMonstruo1= "cr/ac/una/defender/resources/game/start.png";
+    public static final String imagenMonstruo2= "cr/ac/una/defender/resources/game/m1.gif";
+    public static final String imagenMonstruo3= "cr/ac/una/defender/resources/game/m1.gif";
+    public static final String imagenMonstruo4=  "cr/ac/una/defender/resources/game/m1.gif";
     
-    public Monstruo(int numero, String opcion, int posx, int posy) {
+    
+    
+    public static final int Limite_Monstruo_Dificultad = 13;
+  
+  
+    public static final String[] DIFIC3={"picas","diamantes","trebol","corazones","picas","diamantes","trebol","corazones"};
+    public static final String[] DIFIC2={"picas","corazones","picas","corazones","picas","corazones","picas","corazones"};
+    public static final String[] DIFIC1={"picas","picas","picas","picas","picas","picas","picas","picas"};
+
+    public Monstruo(int numero, String dificultad,boolean oculta, int posx, int posy) {
         this.numero = numero;
-        this.opcion = opcion;
+        this.dificultad = dificultad;
+        this.oculta= oculta;
     }
 
-    public Monstruo(int numero, String opcion, float posx, float posy) {
+    public Monstruo(int numero, String dificultad, float posx, float posy, Boolean oculta) {
         this.numero = numero;
-        this.opcion = opcion;
+        this.dificultad = dificultad;
         this.posx = posx;
         this.posy = posy;
+        this.oculta = oculta;
         
     }
 
-    public Monstruo(int numero, String opcion, float posx, float posy, int tamx, int tamy) {
+    public Monstruo(int numero, String dificultad, float posx, float posy, int tamx, int tamy, Boolean oculta) {
         this.numero = numero;
-        this.opcion = opcion;
+        this.dificultad = dificultad;
         this.posx = posx;
         this.posy = posy;
         this.tamx = tamx;
-        this.tamy = tamy;          
+        this.tamy = tamy;
+        this.oculta = oculta;
+    
     }
 
     Monstruo() {
     }
 
+    public void girarMonstruo(Monstruo c){
+    if(this.oculta == true){
+        Image i= new Image(imagenMonstruo+c.getDificultad()+"/"+c.getDificultad()+c.getNumero()+".png");
+        c.setImage(i);
+        oculta = false;
+    }
+        
+    }
     
     public int getNumero() {
         return numero;
@@ -61,12 +84,12 @@ public class Monstruo extends ImageView {
         this.numero = numero;
     }
 
-    public String getOpcion() {
-        return opcion;
+    public String getDificultad() {
+        return dificultad;
     }
 
-    public void setOpcion(String opcion) {
-        this.opcion = opcion;
+    public void setDificultad(String dificultad) {
+        this.dificultad = dificultad;
     }
 
     public float getPosx() {
@@ -101,16 +124,57 @@ public class Monstruo extends ImageView {
         this.tamy = tamy;
     }
 
-    public String getImagenBallesta() {
-        return imagenBallesta;
+    public Boolean getOculta() {
+        return oculta;
     }
 
-    public String getBallestaUno() {
-        return BallestaUno;
+    public void setOculta(Boolean oculta) {
+        this.oculta = oculta;
     }
     
+    
+    public void getLadoMonstruo(){
+    if(oculta == true){
+        
+    if(reverso == 1){
+        URL = imagenMonstruo1;
+    }else if(reverso== 2){
+         URL = imagenMonstruo2;
+    }else if(reverso== 3){
+         URL = imagenMonstruo3;
+    }else if(reverso== 4){
+         URL = imagenMonstruo4;
+    }
+    
+    }else if(oculta == false){
+     URL = imagenMonstruo;
+    
+    }
+    }
+    
+    public String getImagenMonstruo() {
+        return imagenMonstruo;
+    }
+
+    public String getImagenMonstruo1() {
+        return imagenMonstruo1;
+    }
+
+    public String getImagenMonstruo2() {
+        return imagenMonstruo2;
+    }
+
+    public String getImagenMonstruo3() {
+        return imagenMonstruo3;
+    }
+
+    public String getImagenMonstruo4() {
+        return imagenMonstruo4;
+    }
+
     @Override
     public String toString() {
-        return "Card{" + "numero=" + numero + ", palo=" + opcion + '}';
-    } 
+        return "Monstruo{" + "numero=" + numero + ", palo=" + dificultad + '}';
+    }
+    
 }
