@@ -110,4 +110,7 @@ public class LoginViewController extends Controller implements Initializable {
         efectoBotones();
         FlowController.getInstance().goViewInWindowModal("Registro", this.getStage(), Boolean.TRUE);
     }   
+    
+    //lo unico que me motiva para seguir en esta carrera es la plata;
+    
 }
