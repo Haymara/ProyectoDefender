@@ -17,7 +17,7 @@ public abstract class Controller {
 
     private Stage stage;
     private String accion;
-
+    
     public String getAccion() {
         return accion;
     }

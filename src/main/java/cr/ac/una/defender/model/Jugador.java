@@ -78,6 +78,7 @@ public class Jugador implements Serializable {
     }
     
     public Jugador(JugadorDto jugadorDto){
+       this.nombreusuario = jugadorDto.getNombreUsuario();
        actualizarJugador(jugadorDto);
     }
     

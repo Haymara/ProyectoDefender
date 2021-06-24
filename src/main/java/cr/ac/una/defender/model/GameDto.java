@@ -38,6 +38,7 @@ public class GameDto {
         this.ballestaCd = new SimpleStringProperty();
         this.duracion = new SimpleStringProperty();
         this.kills = new SimpleStringProperty();
+        this.id = new SimpleStringProperty();
     }
     
     public GameDto(Game game){
@@ -49,6 +50,7 @@ public class GameDto {
         this.ballestaAd.set(game.getBallestaAd().toString());
         this.ballestaCd.set(game.getBallestaCd().toString());
         this.kills.set(game.getKills().toString());
+        this.id.set(game.getId().toString());
     }
 
     public Long getPuntaje() {
@@ -62,9 +64,7 @@ public class GameDto {
     }
     
     public Long getId() {
-        if (id.get()!=null && !id.get().isEmpty())
             return Long.valueOf(id.get());
-        return null;
     }
 
     public void setId(Long id) {

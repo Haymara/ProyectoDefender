@@ -68,6 +68,14 @@
     /*-fx-background-color: #696969;*/
 }
 
+.jfx-buttonHechizos{
+    -fx-background-radius: 50px;
+    -fx-border-color: #000000;
+    -fx-border-radius: 50px;
+    -fx-border-width: 6;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
 .jfx-button:hover {
     -fx-font-size: 12px;
     -fx-effect: dropshadow( gaussian, red, 15, 0.5, 0.0, 0.0);

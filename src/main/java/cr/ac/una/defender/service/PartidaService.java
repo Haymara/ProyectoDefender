@@ -59,6 +59,8 @@ public class PartidaService {
                 game.actualizarGame(gameDto);
                 game = em.merge(game);
             } else{
+                //game  = new Game(getNombre(), getPuntaje(), getDuracion(), getKills, getSaludcastillo(), getElixir(), getBallestaAd(), getBallestaCd());
+                
                 game = new Game(gameDto);
                 em.persist(game);
             }

@@ -24,7 +24,7 @@ public class CargandoViewController extends Controller implements Initializable 
     @FXML
     private ProgressIndicator pgbCargando;
     
-    double Contador=0.1;
+    double Contador=0.2;
 
     /**
      * Initializes the controller class.

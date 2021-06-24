@@ -9,21 +9,22 @@
    <children>
       <HBox alignment="CENTER" prefHeight="171.0" prefWidth="317.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXButton fx:id="btnSalir" onAction="#onActionBtnSalir" prefHeight="72.0" prefWidth="117.0" text="s">
+            <JFXButton fx:id="btnSalir" onAction="#onActionBtnSalir" prefHeight="72.0" prefWidth="117.0" text="S">
                <HBox.margin>
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton fx:id="btnReiniciar" onAction="#onActionBtnReiniciar" prefHeight="72.0" prefWidth="117.0" text="p">
+            <JFXButton fx:id="btnReiniciar" onAction="#onActionBtnReiniciar" prefHeight="72.0" prefWidth="117.0" text="P">
                <HBox.margin>
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton fx:id="btnContinuar" onAction="#onActionBtnContinuar" prefHeight="72.0" prefWidth="117.0" text="c">
+            <JFXButton fx:id="btnContinuar" onAction="#onActionBtnContinuar" prefHeight="72.0" prefWidth="117.0" text="C">
                <HBox.margin>
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </JFXButton>
+            <JFXButton fx:id="btnGuardar" layoutX="315.0" layoutY="41.0" onAction="#onActionBtnGuardar" prefHeight="72.0" prefWidth="117.0" text="G" />
          </children>
       </HBox>
    </children>

@@ -6,6 +6,7 @@
 package cr.ac.una.defender.controller;
 
 import com.jfoenix.controls.JFXButton;
+import cr.ac.una.defender.App;
 import cr.ac.una.defender.controller.clases.Juego;
 import cr.ac.una.defender.model.GameDto;
 import cr.ac.una.defender.util.FlowController;
@@ -17,10 +18,17 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 /**
  * FXML Controller class
@@ -48,13 +56,11 @@ public class GameViewController extends Controller implements Initializable {
     @FXML
     private BorderPane root;
     @FXML
-    private Label lblPuntajex2;
+    private JFXButton btnMenos;
     @FXML
-    private Label lblNivelx2;
+    private AnchorPane Target;
     @FXML
     private JFXButton btnMaas;
-    @FXML
-    private JFXButton btnMenos;
     @FXML
     private ImageView imvBallesta;
     double initMx, initMy,initX, initY;
@@ -63,19 +69,19 @@ public class GameViewController extends Controller implements Initializable {
     private double progresso;
     private double valor;
  
-     private Juego tablero;
-     private GameDto gameDto;
+    private Juego tablero;
+    private GameDto gameDto;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lblPuntaje.setLabelFor(tablero);
-       // nuevaPartida();
-        tablero = new Juego();
         
-        /*(new Thread(){
+        tablero = new Juego();
+        gameDto = new GameDto();
+        
+        (new Thread(){
           public void run(){
           com.sun.javafx.application.PlatformImpl.startup(()->{});
       
@@ -83,31 +89,15 @@ public class GameViewController extends Controller implements Initializable {
           MediaPlayer player = new MediaPlayer(media);
           player.setAutoPlay(true);
           }
-        }).start();*/
+        }).start();
         
         tablero = new Juego(lblPuntaje, lblNivel);
         AnchorPane pane = new AnchorPane();
         pane.setPadding(new Insets(0, 0, 0, 0));
         pane.getChildren().add(tablero);    
         
-        root.setCenter(pane);
-        
+        root.setCenter(pane);   
     } 
-    
-    public void bindPartida(Boolean nuevo){
-        lblPuntaje.textProperty().bindBidirectional(gameDto.puntaje);
-        
-    }
-    
-    public void unbindPartida(){
-        lblPuntaje.textProperty().unbindBidirectional(gameDto.puntaje);
-    }
-    
-    private void nuevaPartida(){
-  //  unbindPartida();
-    gameDto = new GameDto();
-    //bindPartida(true);
-    }
 
     @Override
     public void initialize() {
@@ -118,13 +108,6 @@ public class GameViewController extends Controller implements Initializable {
         FlowController.getInstance().goViewInWindowModal("MenuGame", this.getStage(), Boolean.TRUE);
     }
 
-    @FXML
-    private void onActionHechizoFuego(ActionEvent event) {
-    }
-
-    @FXML
-    private void onActionHechizoHielo(ActionEvent event) {
-    }
 
     @FXML
     private void onMouseClickedImvBallesta(MouseEvent event) {
@@ -132,7 +115,7 @@ public class GameViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnMas(ActionEvent event) {
-        if(valor<1){
+         if(valor<1){
         valor = ++progresso/100;
         pgbSaludCastillo.setProgress(valor);
     } System.out.println(valor);
@@ -145,5 +128,39 @@ public class GameViewController extends Controller implements Initializable {
         pgbSaludCastillo.setProgress(valor);
     }
           System.out.println(valor);
+    }
+
+    @FXML
+    private void onDragDetectedHechizoFuego(MouseEvent event) {
+        
+        Image hechizoImage = new Image("hechizoDefenderFuego.jpg");
+	ImageView hechizo = new ImageView(hechizoImage);
+        
+        Dragboard db = hechizo.startDragAndDrop(TransferMode.ANY);
+        ClipboardContent content = new ClipboardContent();
+        content.putImage(hechizo.getImage());
+        event.consume();
+    }
+
+    @FXML
+    private void onDragDetectedHechizoHielo(MouseEvent event) {
+    }
+
+    @FXML
+    private void onDragOverTarget(DragEvent event) {
+        if(event.getDragboard().hasImage()){
+            event.acceptTransferModes(TransferMode.ANY);
+        }
+    }
+
+    @FXML
+    private void onDragDroppedTarget(DragEvent event) {
+        Image hechizoImage = new Image("hechizoDefenderFuego.jpg");
+	ImageView hechizo = new ImageView(hechizoImage);
+	hechizo.setTranslateX(event.getX() - 55);
+	hechizo.setTranslateY(event.getY() - 25);
+	Target.getChildren().add(hechizo);
+	event.setDropCompleted(true);
+	event.consume();
     }
 }

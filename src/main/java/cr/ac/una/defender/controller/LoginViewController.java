@@ -56,6 +56,7 @@ public class LoginViewController extends Controller implements Initializable {
           Media media = new Media(App.class.getResource("resources/MusicaFondoDefender.wav").toString());
           MediaPlayer player = new MediaPlayer(media);
           player.setAutoPlay(true);
+          player.setCycleCount(MediaPlayer.INDEFINITE);
           }
         }).start();
     }    
