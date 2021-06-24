@@ -69,8 +69,10 @@ public class GameViewController extends Controller implements Initializable {
     private double progresso;
     private double valor;
  
-    private Juego tablero;
+    private Juego game;
     private GameDto gameDto;
+    @FXML
+    private ImageView imvFire;
 
     /**
      * Initializes the controller class.
@@ -78,7 +80,7 @@ public class GameViewController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        tablero = new Juego();
+        game = new Juego();
         gameDto = new GameDto();
         
         (new Thread(){
@@ -91,10 +93,10 @@ public class GameViewController extends Controller implements Initializable {
           }
         }).start();
         
-        tablero = new Juego(lblPuntaje, lblNivel);
+        game = new Juego(lblPuntaje, lblNivel);
         AnchorPane pane = new AnchorPane();
         pane.setPadding(new Insets(0, 0, 0, 0));
-        pane.getChildren().add(tablero);    
+        pane.getChildren().add(game);    
         
         root.setCenter(pane);   
     } 
@@ -133,13 +135,13 @@ public class GameViewController extends Controller implements Initializable {
     @FXML
     private void onDragDetectedHechizoFuego(MouseEvent event) {
         
-        Image hechizoImage = new Image("hechizoDefenderFuego.jpg");
+        Image hechizoImage = new Image("cr/ac/una/defender/resources/hechizoDefenderFuego.jpg");
 	ImageView hechizo = new ImageView(hechizoImage);
-        
+        /*
         Dragboard db = hechizo.startDragAndDrop(TransferMode.ANY);
         ClipboardContent content = new ClipboardContent();
         content.putImage(hechizo.getImage());
-        event.consume();
+        event.consume();*/
     }
 
     @FXML
@@ -162,5 +164,10 @@ public class GameViewController extends Controller implements Initializable {
 	Target.getChildren().add(hechizo);
 	event.setDropCompleted(true);
 	event.consume();
+    }
+
+    @FXML
+    private void onMouseMovedBtnHechizoFuego(MouseEvent event) {
+    
     }
 }
