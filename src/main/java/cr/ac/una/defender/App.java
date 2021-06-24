@@ -20,7 +20,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
       FlowController.getInstance().InitializeFlow(stage, null);
       stage.setTitle("DEFENDER");
-      FlowController.getInstance().goViewInWindow("loginView");//para mostrar por medio de un flowcontroller una vista en una ventana nueva
+      FlowController.getInstance().goViewInWindow("CargandoView");//para mostrar por medio de un flowcontroller una vista en una ventana nueva
     }
 
     public static void main(String[] args) {
